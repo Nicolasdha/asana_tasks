@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: int_asana_tasks_enriched
+  - name: asana_tasks
     description: "An intermediate model containing enriched task data. It returns tasks and their associated projects, assignees and tags."
     columns:
       - name: task_id

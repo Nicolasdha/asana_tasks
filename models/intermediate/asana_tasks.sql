@@ -17,7 +17,7 @@ WITH tasks_with_assignee AS (
     {{ ref('stg_asana_task') }} t
   LEFT JOIN
     {{ ref('stg_asana_task') }} parentTask ON t.parent_task_id = parentTask.task_id
-  JOIN
+  LEFT JOIN
     {{ ref('stg_asana_assignees') }} a on t.assignee_id = a.assignee_id
 ),
 tasks_with_projects AS (
@@ -25,24 +25,23 @@ tasks_with_projects AS (
     pt.task_id AS task_id,
     STRING_AGG(DISTINCT p.project_name, ', ') AS projects
   FROM
-     {{ ref('stg_asana_project_task') }} pt
+    {{ ref('stg_asana_project_task') }} pt
   JOIN
     {{ ref('stg_asana_project') }} p on pt.project_id = p.project_id
   GROUP BY
     pt.task_id
 ),
 tasks_with_tags AS (
+
   SELECT
-    tt.task_id AS task_id,
-    MAX(CASE WHEN t.category = 'Cost Center' THEN t.value END) AS cost_center,
-    MAX(CASE WHEN t.category = 'Department' THEN t.value END) AS department,
-    MAX(CASE WHEN t.category = 'Location' THEN t.value END) AS location
+      tt.task_id,
+      {{ get_tag_pivot_columns() }}
   FROM
-    {{ ref('stg_asana_task_tag') }}  tt
+      {{ ref('stg_asana_task_tag') }} tt
   JOIN
-    {{ ref('stg_asana_tag') }} t ON tt.tag_id = t.tag_id
+      {{ ref('stg_asana_tag') }} t ON tt.tag_id = t.tag_id
   GROUP BY
-    tt.task_id
+      tt.task_id
 ),
 final_model AS (
   SELECT
@@ -53,13 +52,11 @@ final_model AS (
     ta.completed_at_month,
     ta.completed_at_date,
     ta.parent_task,
-    ta.task_id,
+    --ta.task_id,
     ta.task,
     tp.projects,
     ta.assignee,
-    tt.cost_center,
-    tt.department,
-    tt.location,
+    tt.*,
     ta.notes,
     1 AS count
   FROM
