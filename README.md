@@ -19,9 +19,9 @@ The project follows a three-layered structure:
 The models are designed to be dynamic, allowing a single project to handle schema differences between different client data without failing. This was achieved by:
 
 - **Resilient Staging**: Jinja macros with conditional logic check for the existence of optional source tables (e.g., `assignee`). If a table is missing, a placeholder model has been created to return `NULL` columns to guarantee a consistent schema for downstream models.
-- - **Dynamic Pivoting**: A dynamic macro is used to pivot tag data, which automatically adapts to different tag categories for each client.
+- **Dynamic Pivoting**: A dynamic macro is used to pivot tag data, which automatically adapts to different tag categories for each client.
 
-* **Hierarchical Data**: `LEFT JOIN`s are used in the models to gracefully handle a flat hierarchy and missing parent tasks, ensuring no rows are dropped and the model remains robust.
+- **Hierarchical Data**: `LEFT JOIN`s are used in the models to gracefully handle a flat hierarchy and missing parent tasks, ensuring no rows are dropped and the model remains robust.
 
 #### Dynamic Modeling Patterns
 
