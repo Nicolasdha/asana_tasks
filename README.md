@@ -43,3 +43,4 @@ The `asana_tasks_weekly` model was built using the same date spine approach seen
 - **Data Types**: I assumed that date and timestamp columns are in a consistent format.
 - **Week Start Day**: I assumed that a week begins on Monday, as the `DATE_TRUNC()` function defaults to this standard.
 - **Source Data**: I assumed that a `NULL` value in the `completed_at` column reliably indicates a task that is still open.
+- **Index**: I assumed that the id, project_id, task_id, assignee_id, and tag_id columns are indexed.

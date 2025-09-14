@@ -34,6 +34,7 @@ final_model as (
     task_id AS "task id",
     task,
     projects,
+    assignee,
     {{ get_tag_column_names() }},
     notes,
     created_at_date,
@@ -42,7 +43,8 @@ final_model as (
   FROM
     tasks_weekly
   ORDER BY
-    task_id
+    task_id, 
+    week
 )
 SELECT
   *

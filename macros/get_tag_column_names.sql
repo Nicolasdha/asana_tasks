@@ -12,5 +12,9 @@
     {% do tag_columns.append(category_name.replace(' ', '_')) %}
   {% endfor %}
 
-  {{ return(tag_columns | join(', ')) }}
+  {% if tag_columns | length > 0 %}
+    {{ return(tag_columns | join(', ')) }}
+  {% else %}
+    {{ return("NULL") }}
+  {% endif %}
 {% endmacro %}

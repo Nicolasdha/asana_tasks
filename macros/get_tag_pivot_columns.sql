@@ -25,8 +25,6 @@
 {% endmacro %}
 
 
-
-
 --   SELECT
 --     tt.task_id AS task_id,
 --     MAX(CASE WHEN t.category = 'Cost Center' THEN t.value END) AS cost_center,

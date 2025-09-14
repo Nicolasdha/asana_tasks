@@ -52,11 +52,11 @@ final_model AS (
     ta.completed_at_month,
     ta.completed_at_date,
     ta.parent_task,
-    --ta.task_id,
+    ta.task_id,
     ta.task,
     tp.projects,
     ta.assignee,
-    tt.*,
+    {{ get_tag_column_names() }},
     ta.notes,
     1 AS count
   FROM
