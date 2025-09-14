@@ -31,7 +31,7 @@ final_model as (
     DATE_TRUNC('month', week_start::DATE)::DATE AS month,
     week_start::DATE AS week,
     parent_task AS "parent task",
-    task_id AS "task id",
+    task_id,
     task,
     projects,
     assignee,
