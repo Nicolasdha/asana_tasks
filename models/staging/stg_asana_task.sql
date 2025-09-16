@@ -11,7 +11,7 @@ SELECT
   due_date,
   notes,
 
-  {% if assignee_id_exists %}
+  {% if parent_task_id_exists %}
     parent_task_id,
   {% else %}
     CAST(NULL AS integer) AS parent_task_id,
