@@ -36,11 +36,11 @@ The `asana_tasks_weekly` model was built using the same date spine approach seen
 
 ### Assumptions
 
-- **Data Integrity**: I assumed that primary keys are unique and not null in the raw source tables.
-- **Referential Integrity**: I assumed that foreign keys consistently link to valid primary keys.
-- **Schema Consistency**: I assumed that the core tables exist for both clients, even if some of their columns or related tables are optional.
-- **Tag Categories**: I assumed that a task has at most one tag per category (e.g., one "Cost Center" tag, one "Department" tag).
-- **Data Types**: I assumed that date and timestamp columns are in a consistent format.
-- **Week Start Day**: I assumed that a week begins on Monday, as the `DATE_TRUNC()` function defaults to this standard.
-- **Source Data**: I assumed that a `NULL` value in the `completed_at` column reliably indicates a task that is still open.
-- **Index**: I assumed that all id columns are indexed.
+- **Data Integrity**: Primary keys are unique and not null in the raw source tables.
+- **Referential Integrity**: Foreign keys consistently link to valid primary keys.
+- **Schema Consistency**: The core tables exist for both clients, even if some of their columns or related tables are optional.
+- **Tag Categories**: A task has at most one tag per category (e.g., one "Cost Center" tag, one "Department" tag).
+- **Data Types**: Date and timestamp columns are in a consistent format.
+- **Week Start Day**: A week begins on Monday, as the `DATE_TRUNC()` function defaults to this standard.
+- **Source Data**: Aa `NULL` value in the `completed_at` column reliably indicates a task that is still open.
+- **Index**: All id columns are indexed.
